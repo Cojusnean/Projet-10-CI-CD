@@ -75,7 +75,7 @@ jobs:
         git commit -m "Update Coverage Reports"
         git push origin coverage-reports
     env:
-     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     GITHUB_TOKEN: ${{ secrets.GH_PAT }}
   sonarqube_scan:
     name: Run SonarQube Scanner
     needs: build-and-test-back-witch-coverage
