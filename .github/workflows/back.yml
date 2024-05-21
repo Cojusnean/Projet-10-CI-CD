@@ -79,7 +79,7 @@ jobs:
   sonarqube_scan:
     name: Run SonarQube Scanner
     needs: build-and-test-back-witch-coverage
-    runs-on: [self-hosted, Windows, X64]
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
