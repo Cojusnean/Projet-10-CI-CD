@@ -1,1 +1,30 @@
-.
+name: back CI/CD Workflow
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'back/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'back/**'
+jobs:
+  sonarqube_scan:
+    name: Run SonarQube Scanner
+    runs-on: [self-hosted]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'  # Ensure Java 11 is used for SonarQube
+      - name: Run SonarQube Scanner
+        run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar --file back/pom.xml
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
