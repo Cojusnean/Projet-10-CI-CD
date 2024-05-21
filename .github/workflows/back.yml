@@ -60,7 +60,11 @@ jobs:
           java-version: '17'  # Ensure Java 11 is used for SonarQube
       - name: Run SonarQube Scanner
         #run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f back/pom.xml
-        run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f back/pom.xml -Dsonar.project.settings=back/sonar-project.properties
+        run: |
+          mvn clean verify sonar:sonar -f back/pom.xml \
+            -Dsonar.projectKey=CI-CD-OPENCLASSROOM-BACK \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
