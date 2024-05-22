@@ -89,4 +89,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: front
-           
+          args: >
+            -Dsonar.projectKey=mihai-cojusnean_ci-cd-openclassroom-front
+            -Dsonar.organization=mihai-cojusnean
