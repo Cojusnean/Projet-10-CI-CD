@@ -51,38 +51,15 @@ jobs:
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      
    build-front:
-    name: SonarQube front
-    strategy:
-        matrix:
-            os: [self-hosted] # You can add other OS here
-            node-version: [18]
-    runs-on: ${{ matrix.os }}
-
+    name: Build and analyze
+    runs-on: ubuntu-latest
+    
     steps:
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      
-      - name: NPM clean install
-        working-directory: front
-        run: npm ci
-      
-      - name: Coverage tests
-        working-directory: front
-        run: |
-          npm install -g @angular/cli
-          ng test --code-coverage --watch=false --browsers ChromeHeadless
-      
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        with:
-          projectBaseDir: front
+      - uses: sonarsource/sonarqube-scan-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
      
