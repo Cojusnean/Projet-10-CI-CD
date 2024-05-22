@@ -58,25 +58,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Install Docker
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-      
-      # Start SonarQube Docker container
       - name: Start SonarQube container
-        run: docker run -d --rm --name sonarqube -p 9000:9000 sonarqube
-      
-      # Execute SonarQube scanner inside the running Docker container
-      - name: Run SonarQube Scanner
-        run: |
-          docker exec sonarqube sonar-scanner \
-            -Dsonar.projectKey=my_project_key \
-            -Dsonar.sources=.
+        run: docker run -d --name sonarqube -p 9000:9000 sonarqube
+        
+      - name: Wait for SonarQube to start
+        run: sleep 30s  # Adjust as necessary
+        
+      - name: Run SonarQube scanner
+        run: docker exec sonarqube sonar-scanner \
+             -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT \
+             -Dsonar.sources=.
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: http://localhost:9000  # URL of the SonarQube server running in the Docker container
-
-      # Stop the SonarQube Docker container after analysis
-      - name: Stop SonarQube container
-        run: docker stop sonarqube
