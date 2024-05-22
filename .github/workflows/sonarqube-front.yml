@@ -64,7 +64,7 @@ jobs:
          node-version: '20'
       - name: Run SonarQube Scanner
         run: |
-          "C:/sonar/native-sonar-scanner/sonar-scanner-5.0.1.3006-windows/bin/sonar-scanner.bat"
+          "C:\sonar\native-sonar-scanner\sonar-scanner-5.0.1.3006-windows\bin\sonar-scanner.bat"
         working-directory: front
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
