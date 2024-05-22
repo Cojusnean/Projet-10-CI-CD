@@ -3,7 +3,7 @@ name: Web CI/CD Workflow
 on: 
   push:
     branches: 
-      - developpe
+      - develop
     paths:
       - 'front/**'
   pull_request:
