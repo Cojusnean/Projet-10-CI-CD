@@ -69,12 +69,11 @@ jobs:
          node-version: '20'
    
       - name: Run SonarQube Scanner
-        run: |
-          sonar-scanner
-          -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT 
-          -Dsonar.projectName='CI-CD-OPENCLASSROOM-FRONT'
-          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        env:
-           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        uses: sonarsource/sonarqube-scan-action@v1
+        with:
+          sonar-token: ${{ secrets.SONAR_TOKEN_FRONT }}
+          sonar-project-key: CI-CD-OPENCLASSROOM-FRONT
+          sonar-project-name: CI-CD-OPENCLASSROOM-FRONT
+          sonar-project-version: 1.0
+          sonar.sources: front
+          sonar.exclusions: "**/*.test.js,**/*.spec.js"
