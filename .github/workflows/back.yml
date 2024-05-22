@@ -64,7 +64,6 @@ jobs:
         run: mvn clean verify sonar:sonar
              -Dsonar.projectKey=CI-CD-OPENCLASSROOM-BACK
              -Dsonar.projectName='CI-CD-OPENCLASSROOM-BACK'
-             -Dsonar.host.url=http://localhost:9000
              -Dsonar.token=sqp_82818ef1a770bdc66bda0af8095b417cd062dc09
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
