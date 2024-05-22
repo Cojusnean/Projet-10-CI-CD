@@ -65,15 +65,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Jasmine tests and generate report
-        run: npm run test -- --no-watch --code-coverage
-
-      - name: Publish Jasmine
-        uses: actions/upload-artifact@v4
-        with:
-          name: jasmine-report
-          path: front/coverage/bobapp/*
-
       - name: install scanner
         run: npm install -g sonarqube-scanner
 
