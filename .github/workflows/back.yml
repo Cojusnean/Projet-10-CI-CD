@@ -59,8 +59,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Navigate to Project Directory
+        run: cd back
       - name: Run SonarQube Scanner
-        run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.config.location=.back/sonar-project.properties -Dsonar.projectBaseDir=./back
+        run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.config.location=./sonar-project.properties
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
