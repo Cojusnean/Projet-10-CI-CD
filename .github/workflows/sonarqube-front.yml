@@ -1,5 +1,4 @@
-name: Web CI/CD Workflow
-
+name: Front CI/CD Workflow
 on: 
   push:
     branches: 
