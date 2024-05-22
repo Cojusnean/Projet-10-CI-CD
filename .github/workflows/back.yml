@@ -65,6 +65,7 @@ jobs:
              -Dsonar.projectKey=CI-CD-OPENCLASSROOM-BACK
              -Dsonar.projectName='CI-CD-OPENCLASSROOM-BACK'
              -Dsonar.token=sqp_82818ef1a770bdc66bda0af8095b417cd062dc09
+             -Dsonar.java.binaries=back/target/classes
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
