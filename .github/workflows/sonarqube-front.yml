@@ -66,5 +66,5 @@ jobs:
         run: sonar-scanner 
         working-directory: front
         env:
-           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
