@@ -63,7 +63,7 @@ jobs:
         with:
          node-version: '20'
       - name: Run SonarQube Scanner
-        run: sonar-scanner 
+        run: sonar-scanner -Dsonar.scanner.home=C:\sonarqube-10.5.1.90531
         working-directory: front
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
