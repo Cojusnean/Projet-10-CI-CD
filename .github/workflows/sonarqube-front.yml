@@ -13,11 +13,8 @@ on:
       - 'front/**'
 
 jobs:
-  build-and-test-front-with-coverage:
+   build-and-test-front-with-coverage:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./front
     
     steps:
     - uses: actions/checkout@v4
@@ -29,11 +26,14 @@ jobs:
         cache-dependency-path: front/package-lock.json
     - name: Install dependencies for front project
       run: npm ci
+      working-directory: front
       
     - name: Build front project
       run: npm run build --if-present
+      working-directory: front
  
     - name: Run test with coverage
+      working-directory: front
       run: npm run test -- --code-coverage --browsers=ChromeHeadless --watch=false
       
     - name: Commit Coverage Report
@@ -50,7 +50,7 @@ jobs:
         git push origin coverage-reports
     env:
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  sonarqube_scan:
+   sonarqube_scan:
     name: Run SonarQube Scanner
     needs: build-and-test-front-with-coverage
     runs-on: self-hosted
