@@ -44,7 +44,7 @@ jobs:
         git commit -m "Update Coverage Reports"
         git push https://${{ secrets.GH_PAT }}@github.com/Cojusnean/CI-CD-OPENCLASSROOM.git coverage-reports
     env:
-     GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   sonarqube_scan:
     name: Run SonarQube Scanner
     needs: build-and-test-back-witch-coverage
