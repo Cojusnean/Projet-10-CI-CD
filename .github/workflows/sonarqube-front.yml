@@ -52,7 +52,7 @@ jobs:
      
    build-front:
     name: Build and analyze
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     steps:
       - uses: actions/checkout@v4
