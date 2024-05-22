@@ -60,7 +60,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Run SonarQube Scanner
-        run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dfile=file:///D:/actions-runner/_work/CI-CD-OPENCLASSROOM/CI-CD-OPENCLASSROOM/back/pom.xml -Dsonar.config.location=./sonar-project.properties
+        run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dfile=D:\actions-runner\_work\CI-CD-OPENCLASSROOM\CI-CD-OPENCLASSROOM\back\pom.xml -Dsonar.config.location=./sonar-project.properties
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
