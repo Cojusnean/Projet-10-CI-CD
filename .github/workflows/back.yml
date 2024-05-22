@@ -63,7 +63,7 @@ jobs:
         #run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f back/pom.xml
         run: |
              mvn clean install
-             mvn sonar:sonar -Dsonar.token=sqa_0305d0990af6cc49578bc5bf607e4baaee9ba5ce
+             mvn sonar:sonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
