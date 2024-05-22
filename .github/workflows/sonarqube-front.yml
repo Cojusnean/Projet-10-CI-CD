@@ -52,7 +52,7 @@ jobs:
    sonarqube_scan:
     name: Run SonarQube Scanner
     needs: build-and-test-front-with-coverage
-    runs-on: [self-hosted, macOS, X64]
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
