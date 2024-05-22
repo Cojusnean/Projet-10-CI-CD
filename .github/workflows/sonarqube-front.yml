@@ -62,11 +62,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
          node-version: '20'
+      - name: Set up Sonar Scanner
+        run: |
+          echo "SONAR_SCANNER_HOME=C:/sonar/native-sonar-scanner/sonar-scanner-5.0.1.3006-windows" >> $GITHUB_ENV
+          echo "C:/sonar/native-sonar-scanner/sonar-scanner-5.0.1.3006-windows/bin" >> $GITHUB_PATH
       - name: Run SonarQube Scanner
         run: sonar-scanner
         working-directory: front
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-           SONAR_SCANNER_HOME: 'C:/sonar/native-sonar-scanner'
            
