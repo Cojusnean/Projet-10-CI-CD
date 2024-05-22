@@ -1,0 +1,87 @@
+name: Back CI/CD Workflow
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'back/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'back/**'
+jobs:
+  build-and-test-back-witch-coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+       path: ~/.m2
+       key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+       restore-keys: |
+        ${{ runner.os }}-m2-
+    - name: Build and Test back-end
+      run: |
+        mvn -B package --file back/pom.xml
+        mvn test --file back/pom.xml
+    - name: Commit Coverage Report
+      run: |
+        git config --global user.email "mihai.cojusnean@gmail.com"
+        git config --global user.name "GitHub Actions"
+        git fetch --all
+        git checkout coverage-reports
+        git pull origin coverage-reports
+        mkdir -p coverage-repport/back
+        cp -r back/target/site/jacoco/* ./coverage-repport/back
+        git add ./coverage-repport/back
+        git commit -m "Update Coverage Reports"
+        git push https://${{ secrets.GH_PAT }}@github.com/Cojusnean/CI-CD-OPENCLASSROOM.git coverage-reports
+    env:
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  sonarqube_scan:
+    name: Run SonarQube Scanner
+    needs: build-and-test-back-witch-coverage
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - 
+        name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - 
+        name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - 
+        name: Scan with sonarcloud
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: back
+          args: >
+            -Dsonar.projectKey=cojusnean_ci-cd-openclassroom-back
+            -Dsonar.organization=cojusnean
+            -Dsonar.java.binaries=back/target/classes
