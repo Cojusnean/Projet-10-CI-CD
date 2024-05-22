@@ -64,7 +64,7 @@ jobs:
 
       - name: Run SonarQube Scanner
         run: |
-          docker exec sonarqube sonar-scanner
-            -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT
+          docker exec sonarqube /opt/sonar-scanner/bin/sonar-scanner 
+          -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
