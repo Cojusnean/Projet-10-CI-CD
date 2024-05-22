@@ -34,7 +34,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
+        working-directory: back
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CI-CD-OPENCLASSROOM-BACK -Dsonar.projectName='CI-CD-OPENCLASSROOM-BACK' -f back/pom.xml
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=CI-CD-OPENCLASSROOM-BACK -Dsonar.projectName='CI-CD-OPENCLASSROOM-BACK'
