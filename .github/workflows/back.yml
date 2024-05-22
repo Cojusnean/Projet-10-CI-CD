@@ -58,7 +58,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'corretto'
+          distribution: 'temurin'
       - name: Run SonarQube Scanner
         run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f back/pom.xml
         env:
