@@ -63,13 +63,10 @@ jobs:
         with:
          node-version: '20'
       - name: Run SonarQube Scanner
-        run: |
-          powershell -Command Invoke-WebRequest -Uri https://docs.sonarsource.com/sonarqube/latest/ -OutFile sonar-scanner.zip
-          Expand-Archive sonar-scanner.zip
-          Set-ItemProperty -Path sonar-scanner/bin/sonar-scanner.bat -Name IsExecutable -Value $true
-          Move-Item sonar-scanner C:\a
+        run: sonar-scanner -Dsonar.scanner.home=C:\sonarqube-10.5.1.90531
         working-directory: front
         env:
            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
            SONAR_SCANNER_HOME: 'C:\sonarqube-10.5.1.90531'
+           
