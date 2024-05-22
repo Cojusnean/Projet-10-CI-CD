@@ -50,16 +50,21 @@ jobs:
     env:
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      
-   build-front:
+   build:
     name: Build and analyze
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: sonarsource/sonarqube-scan-action@master
+
+      - name: Start SonarQube Container
+        run: docker run -d --name sonarqube -p 9000:9000 sonarqube
+
+      - name: Run SonarQube Scanner
+        run: |
+          docker exec sonarqube sonar-scanner
+            -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-     
