@@ -75,8 +75,12 @@ jobs:
       - 
         name: Run SonarQube Scanner
         run: |
-          mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -DprojectName=CI-CD-OPENCLASSROOM-BACK -Dsonar.projectKey=CI-CD-OPENCLASSROOM-BACK --file back/pom.xml
-      
+          mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -DprojectName=CI-CD-OPENCLASSROOM-BACK
+          -Dsonar.projectKey=CI-CD-OPENCLASSROOM-BACK
+          -Dsonar.inclusions='**/*.java'
+          -Dsonar.exclusions='**/target/**'
+          -Dsonar.java.binaries='back/target/classes'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
