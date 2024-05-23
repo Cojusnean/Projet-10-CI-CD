@@ -47,7 +47,7 @@ jobs:
     env:
      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      
-  sonarqube_scan:
+  sonarqube-scan:
     name: Run SonarQube Scanner
     needs: build-and-test-back-with-coverage
     runs-on: self-hosted 
@@ -67,9 +67,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-  build-push-dockers:
+  build-push-docker:
     name: Buid and push back docker image
-    needs: [sonarqube_scan]
+    needs: [sonarqube-scan]
     runs-on: ubuntu-latest
     steps:
       - 
