@@ -66,11 +66,8 @@ jobs:
         with:
           fetch-depth: 0
       - 
-        name: List contents of front directory
-        run: ls -la front
-      -
-        name: Fetch sonar-project.properties for front
-        run: cp ./front/sonar-project.properties .
+        name: Fetch sonar-project.properties
+        run: cp sonar-project.properties .
       - 
         name: SonarCloud Scan
         uses: sonarsource/sonarqube-scan-action@master
