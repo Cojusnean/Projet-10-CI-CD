@@ -93,10 +93,6 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           projectBaseDir: front
-          args: >
-            -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT
-            -DprojectName=CI-CD-OPENCLASSROOM-FRONT
-            -Dsonar.test.inclusions=**/*.test.js,**/*.spec.js
             
    build-push-docker:
     name: Build and push front docker image
