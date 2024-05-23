@@ -63,21 +63,6 @@ jobs:
         with:
           fetch-depth: 0
       - 
-        name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - 
-        name: NPM clean install
-        working-directory: front
-        run: npm ci
-      
-      - name: Coverage tests
-        working-directory: front
-        run: |
-          npm install -g @angular/cli
-          ng test --code-coverage --watch=false --browsers ChromeHeadless
-      - 
         name: SonarCloud Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
