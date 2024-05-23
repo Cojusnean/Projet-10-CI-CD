@@ -37,8 +37,8 @@ jobs:
       name: Run test with coverage
       working-directory: front
       run: npm run test -- --code-coverage --browsers=ChromeHeadless --watch=false
-      
-    - name: Commit Coverage Report
+    - 
+      name: Commit Coverage Report
       run: |
         git config --global user.email "mihai.cojusnean@gmail.com"
         git config --global user.name "GitHub Actions"
@@ -66,6 +66,9 @@ jobs:
         with:
           fetch-depth: 0
       - 
+        name: List contents of front directory
+        run: ls -la front
+      -
         name: Fetch sonar-project.properties for front
         run: cp ./front/sonar-project.properties .
       - 
