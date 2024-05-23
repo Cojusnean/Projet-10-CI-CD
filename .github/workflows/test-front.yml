@@ -84,6 +84,7 @@ jobs:
           projectBaseDir: front
           args: >
             -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT
+            -DprojectName=CI-CD-OPENCLASSROOM-FRONT
             
    build-push-docker:
     name: Buid and push front docker image
