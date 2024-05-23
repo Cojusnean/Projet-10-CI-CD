@@ -74,6 +74,11 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT
+            -DprojectName=CI-CD-OPENCLASSROOM-FRONT
+            -Dsonar.test.inclusions=**/*.test.js,**/*.spec.js
             
    build-push-docker:
     name: Build and push front docker image
