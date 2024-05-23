@@ -64,7 +64,7 @@ jobs:
       - name: Run SonarQube Scanner
         run: mvn clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar --file back/pom.xml
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   build-push-dockers:
