@@ -76,7 +76,6 @@ jobs:
             -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT
             -DprojectName=CI-CD-OPENCLASSROOM-FRONT
             -Dsonar.test.inclusions=**/*.test.js,**/*.spec.js
-            -Dsonar.inclusions=**/*.ts
             -Dsonar.exclusions=**/node_modules/**, **/*.spec.ts, **/*.test.ts
             
    build-push-docker:
