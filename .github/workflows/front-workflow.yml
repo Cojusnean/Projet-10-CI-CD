@@ -66,9 +66,6 @@ jobs:
         with:
           fetch-depth: 0
       - 
-        name: Fetch sonar-project.properties
-        run: cp sonar-project.properties .
-      - 
         name: SonarCloud Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
