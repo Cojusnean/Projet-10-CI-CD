@@ -66,6 +66,9 @@ jobs:
         with:
           fetch-depth: 0
       - 
+        name: Fetch sonar-project.properties for front
+        run: cp front/sonar-project.properties
+      - 
         name: SonarCloud Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
