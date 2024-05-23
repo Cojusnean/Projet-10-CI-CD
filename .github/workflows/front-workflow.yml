@@ -72,6 +72,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
+          projectBaseDir: front
           args: >
             -Dsonar.projectKey=CI-CD-OPENCLASSROOM-FRONT
             -DprojectName=CI-CD-OPENCLASSROOM-FRONT
